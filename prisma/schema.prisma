@@ -16,6 +16,7 @@ model User {
     favResidenciesID String[]    @db.ObjectId
     ownedResidencies Residency[] @relation("Owner")
     newsCreated News[] @relation("Owner")
+    role             String @default("user")
 }
 
 model Residency {
