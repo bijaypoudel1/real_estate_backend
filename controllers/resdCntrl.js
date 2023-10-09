@@ -29,6 +29,18 @@ export const createResidency = asyncHandler(async (req, res) => {
   }
 });
 
+export const myResidencies = asyncHandler(async (req, res) => {
+  const { email } = req.header;
+
+  if (!email) res.status(400).json({ message: "Email not found" });
+
+  const myProperty = await prisma.residency.findMany({
+    where: { userEmail: email },
+  });
+
+  res.status(200).json({ message: "Residency fetched successfully", myProperty });
+});
+
 // function to get all the documents/residencies
 export const getAllResidencies = asyncHandler(async (req, res) => {
   const residencies = await prisma.residency.findMany({
