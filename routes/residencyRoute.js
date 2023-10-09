@@ -1,5 +1,5 @@
 import express from "express";
-import { createResidency, getAllResidencies, getResidency, myResidencies } from "../controllers/resdCntrl.js";
+import { createResidency, deleteResidency, getAllResidencies, getResidency, myResidencies, updateResidency } from "../controllers/resdCntrl.js";
 import jwtCheck from "../config/auth0Config.js";
 const router = express.Router();
 
@@ -74,4 +74,6 @@ router.post("/create", jwtCheck, createResidency);
 router.get("/allresd", getAllResidencies);
 router.get("/:id", getResidency);
 router.get("/my-property", myResidencies);
+router.delete("/:id", deleteResidency);
+router.patch("/:id", updateResidency);
 export { router as residencyRoute };

@@ -64,3 +64,43 @@ export const getResidency = asyncHandler(async (req, res) => {
     throw new Error(err.message);
   }
 });
+
+export const deleteResidency = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const residency = await prisma.residency.findUnique({
+      where: { id },
+    });
+    if (!residency) res.status(404).json({ message: "Residency not found" });
+
+    await prisma.residency.delete({
+      where: { id },
+    });
+    res.status(200).json({ message: "Residency deleted successfully" });
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
+
+export const updateResidency = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const body = req.body;
+  try {
+    const residency = await prisma.residency.findUnique({
+      where: { id },
+    });
+    if (!residency)
+      res.status(404).json({
+        message: "No residency found",
+      });
+    await prisma.residency.update({
+      where: { id },
+      data: { ...body },
+    });
+    res.status(200).json({
+      message: "residency Update successfully",
+    });
+  } catch (err) {}
+});
