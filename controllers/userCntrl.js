@@ -123,7 +123,9 @@ export const toFav = asyncHandler(async (req, res) => {
 });
 
 export const getAllUser = asyncHandler(async (req, res) => {
-  const allUser = await prisma.user.findMany();
+  const allUser = await prisma.user.findMany({
+    includes: bookVisit,
+  });
 
   res.status(200).send(allUser);
 });
