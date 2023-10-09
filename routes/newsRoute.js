@@ -5,9 +5,9 @@ import { adminCheck } from "../middleware/adminCheck.middleware.js";
 const router = express.Router();
 
 router.get("/", getNews);
-router.post("/", jwtCheck, adminCheck, createNews);
+router.post("/", jwtCheck, createNews);
 router.get("/:id", gesSingleNews);
-router.patch("/:id", jwtCheck, adminCheck, updateNews);
-router.delete("/:id", jwtCheck, adminCheck, deleteNews);
+router.patch("/:id", jwtCheck, updateNews);
+router.delete("/:id", jwtCheck, deleteNews);
 
 export { router as newsRoute };

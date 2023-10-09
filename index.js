@@ -7,6 +7,8 @@ import swaggerJSDoc from "swagger-jsdoc";
 import { userRoute } from "./routes/userRoute.js";
 import { residencyRoute } from "./routes/residencyRoute.js";
 import { newsRoute } from "./routes/newsRoute.js";
+import { homeLoanRoute } from "./routes/homeLoanRoute.js";
+import { faqRoute } from "./routes/faqRoute.js";
 dotenv.config();
 
 const app = express();
@@ -44,3 +46,5 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(spec));
 app.use("/api/user", userRoute);
 app.use("api/news", newsRoute);
 app.use("/api/residency", residencyRoute);
+app.use("api/homeloan", homeLoanRoute);
+app.use("api/faq", faqRoute);
