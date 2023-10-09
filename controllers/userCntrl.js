@@ -57,6 +57,17 @@ export const getAllBookings = asyncHandler(async (req, res) => {
   }
 });
 
+export const getAllUserBooking = asyncHandler(async (req, res) => {
+  try {
+    const bookings = await prisma.user.findUnique({
+      select: { bookedVisits: true },
+    });
+    res.status(200).send(bookings);
+  } catch (err) {
+    throw new Error(err.message);
+  }
+});
+
 // function to cancel the booking
 export const cancelBooking = asyncHandler(async (req, res) => {
   const { email } = req.body;
